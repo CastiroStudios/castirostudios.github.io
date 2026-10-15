@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta property="og:image" content="assets/work/creator-reel.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/castiro-favicon.svg">
+  <title>Page not found | Cast.iro Studios</title>
+  <style>
+    :root{--canvas:#0a0a0b;--surface:#141416;--ink:#ececee;--accent:#5d80f5;--accent-rgb:93,128,245;--cobalt:#3a5cc8;--serif:"Syne",Georgia,serif;--sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:"DM Mono",Consolas,monospace}
+    *{box-sizing:border-box}html{background:var(--canvas)}body{min-width:320px;min-height:100svh;margin:0;display:grid;place-items:center;overflow-x:hidden;padding:32px 24px;background:var(--canvas);color:var(--ink);font-family:var(--sans);isolation:isolate}body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background-image:radial-gradient(circle,rgba(236,236,238,.17) 0 1px,transparent 1.6px);background-size:28px 28px}.kinetic-glow{position:fixed;z-index:-1;top:0;left:0;width:360px;height:360px;margin:-180px 0 0 -180px;pointer-events:none;opacity:0;background-image:radial-gradient(circle,rgba(var(--accent-rgb),.95) 0 1.2px,transparent 1.8px);background-size:28px 28px;-webkit-mask-image:radial-gradient(circle closest-side,#000 15%,transparent);mask-image:radial-gradient(circle closest-side,#000 15%,transparent);transition:opacity .4s}.kinetic-glow.on{opacity:1}.nle-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:99;background:var(--accent);box-shadow:0 0 12px rgba(var(--accent-rgb),.8);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+    main{width:min(760px,100%);position:relative;padding:clamp(25px,5vw,62px);border:1px solid rgba(236,236,238,.13);border-radius:22px;background:radial-gradient(circle at 85% 0,rgba(var(--accent-rgb),.15),transparent 55%),var(--surface);box-shadow:0 35px 90px #0008}img{display:block;width:175px;height:auto;margin-bottom:75px}.badge{display:inline-flex;align-items:center;gap:14px;padding:8px 12px;border:1px solid rgba(var(--accent-rgb),.5);border-radius:4px;color:var(--accent);font:11px var(--mono);letter-spacing:.12em}.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}.timecode{display:block;margin-top:16px;color:#9c9ca3;font:11px var(--mono);letter-spacing:.1em}h1{font:700 clamp(45px,9vw,86px)/1.02 var(--serif);letter-spacing:-.07em;margin:25px 0}p{max-width:480px;color:#b5b5ba;line-height:1.75}.button{display:inline-flex;align-items:center;justify-content:center;margin-top:28px;padding:15px 24px;min-height:50px;border:1px solid var(--cobalt);border-radius:999px;background:var(--cobalt);color:#fff;text-decoration:none;font-size:13px;font-weight:800;transition:transform .25s,border-color .25s}.button:hover{border-color:var(--accent)}.button:focus-visible{outline:2px solid var(--ink);outline-offset:5px}@media(prefers-reduced-motion:reduce){.button,.kinetic-glow{transition:none}}
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html" aria-label="Cast.iro Studios home"><img src="assets/castiro-logo-horizontal-white.svg" alt="Cast.iro Studios" width="2090" height="800"></a>
+    <span class="badge">MEDIA OFFLINE // 404</span><time class="timecode">00:04:04:00</time>
+    <h1>This frame<br>is missing.</h1>
+    <p>The page may have moved, or the link may be incomplete. Return to the studio and find the next cut.</p>
+    <a class="button magnetic" href="index.html">Back to the studio ↗</a>
+  </main>
+  <script>
+    (()=>{
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer:fine)').matches)return;
+      const GRID=28,HALF=180,glow=document.createElement('div'),button=document.querySelector('.magnetic');
+      glow.className='kinetic-glow';glow.setAttribute('aria-hidden','true');document.body.prepend(glow);
+      let x=0,y=0,pending=false;
+      addEventListener('pointermove',event=>{x=event.clientX;y=event.clientY;if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;glow.style.transform=`translate(${x}px, ${y}px)`;glow.style.backgroundPosition=`${(HALF-x)%GRID}px ${(HALF-y)%GRID}px`;glow.classList.add('on');});},{passive:true});
+      document.addEventListener('mouseout',event=>{if(!event.relatedTarget)glow.classList.remove('on');});
+      button.addEventListener('pointermove',event=>{const rect=button.getBoundingClientRect();button.style.transform=`translate(${(event.clientX-rect.left-rect.width/2)*.16}px, ${(event.clientY-rect.top-rect.height/2)*.22}px)`;});
+      button.addEventListener('pointerleave',()=>{button.style.transform='';});
+    })();
+  </script>
+  <script src="assets/studio-polish.js" defer></script>
+</body>
+</html>
