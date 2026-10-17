@@ -1284,10 +1284,17 @@
 
     /* A card with an approved quote: wider, quote first, name below. */
     .client-chip.has-quote {
+      flex-shrink: 0;
       justify-content: space-between;
       width: clamp(300px, 30vw, 400px);
+      min-height: 224px;
       padding: 22px 24px 18px;
       white-space: normal;
+    }
+
+    .client-chip.has-quote .client-who > span:last-child {
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .client-chip blockquote {
@@ -2091,70 +2098,70 @@
         <div class="client-row to-right">
           <div class="client-track">
             <ul class="client-list">
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Fast, reliable and sharp. Cast.iro feels like an extension of our own team.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Every edit came back cleaner than the brief. Easy to work with, every single time.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Our ads finally stop the scroll. Creative, quick and always on brief.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Consistent quality at volume. They kept the channel moving without me chasing anything.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They understood the vibe straight away and cut the video exactly to the beat.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>My UGC looks premium now. Quick turnarounds and great communication.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great editors, great work. Delivered exactly what we needed, on time.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Sharp pacing and clean cuts. The videos hold attention from the first second.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They made my gameplay feel like a show. Viewers stay way longer now.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Professional from start to finish. Clear communication and quality edits.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Quick, creative and detail-obsessed. Exactly what you want in an editor.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Sent raw footage, got back a polished video. Couldn&#39;t be simpler.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Reliable and talented. Every revision was handled fast and without fuss.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They brought the story out of my footage beautifully. Thoughtful, careful work.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
             </ul>
             <ul class="client-list" aria-hidden="true">
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Fast, reliable and sharp. Cast.iro feels like an extension of our own team.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Every edit came back cleaner than the brief. Easy to work with, every single time.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Our ads finally stop the scroll. Creative, quick and always on brief.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Consistent quality at volume. They kept the channel moving without me chasing anything.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They understood the vibe straight away and cut the video exactly to the beat.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>My UGC looks premium now. Quick turnarounds and great communication.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great editors, great work. Delivered exactly what we needed, on time.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Sharp pacing and clean cuts. The videos hold attention from the first second.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They made my gameplay feel like a show. Viewers stay way longer now.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Professional from start to finish. Clear communication and quality edits.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Quick, creative and detail-obsessed. Exactly what you want in an editor.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Sent raw footage, got back a polished video. Couldn&#39;t be simpler.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Reliable and talented. Every revision was handled fast and without fuss.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They brought the story out of my footage beautifully. Thoughtful, careful work.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
             </ul>
           </div>
         </div>
         <div class="client-row to-left">
           <div class="client-track">
             <ul class="client-list">
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great energy, great edits. My content has never looked this good.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Friendly, fast and professional. They made the whole process easy.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>High quality work delivered on time, every time. Highly recommended.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They nailed the style on the first cut. Barely needed any changes.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Excellent editing and quick replies. A team you can rely on.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Clean, modern edits that made my brand look professional.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Strong storytelling and smooth pacing. Exactly what my videos needed.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Precise, creative and always on schedule. A pleasure to work with.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They took everything off my plate and the results speak for themselves.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Thoughtful edits with real attention to detail. Very happy with the result.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Fast turnaround, beautiful edits, and they really listened to my ideas.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Professional, patient and creative. The final video exceeded my expectations.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great communication and top-quality editing. Would work with them again.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
             </ul>
             <ul class="client-list" aria-hidden="true">
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
-                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great energy, great edits. My content has never looked this good.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Friendly, fast and professional. They made the whole process easy.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>High quality work delivered on time, every time. Highly recommended.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They nailed the style on the first cut. Barely needed any changes.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Excellent editing and quick replies. A team you can rely on.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Clean, modern edits that made my brand look professional.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Strong storytelling and smooth pacing. Exactly what my videos needed.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Precise, creative and always on schedule. A pleasure to work with.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>They took everything off my plate and the results speak for themselves.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Thoughtful edits with real attention to detail. Very happy with the result.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Fast turnaround, beautiful edits, and they really listened to my ideas.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Professional, patient and creative. The final video exceeded my expectations.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
+                <li class="client-chip has-quote"><blockquote>Great communication and top-quality editing. Would work with them again.</blockquote><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
             </ul>
           </div>
         </div>
