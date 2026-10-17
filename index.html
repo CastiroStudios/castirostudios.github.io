@@ -1219,9 +1219,9 @@
 
     /* ==========================================================
        11a. CLIENT WALL
-       Two drifting rows of client name chips with a ribbon of studio
-       taglines between them, each moving opposite to its neighbour.
-       Like the tools marquee, each track holds its list twice and
+       Two drifting rows of client cards: the top row travels left to
+       right, the bottom row right to left. A card grows wider when it
+       carries the client's approved quote. Like the tools marquee, each track holds its list twice and
        slides half its width per loop; only the first copy is read
        aloud. Hovering a row pauses it. The palette stays corporate:
        navy, steel, slate and silver around the cobalt accent.
@@ -1243,7 +1243,9 @@
       animation: marquee 80s linear infinite;
     }
 
-    .client-row.reverse .client-track {
+    /* The marquee keyframes slide content leftward, so the top row
+       runs them in reverse to travel left to right. */
+    .client-row.to-right .client-track {
       animation-direction: reverse;
     }
 
@@ -1251,24 +1253,20 @@
       animation-play-state: paused;
     }
 
-    .client-list,
-    .phrase-list {
-      display: flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
     .client-list {
+      display: flex;
+      align-items: stretch;
       gap: 16px;
-      padding-right: 16px;
+      margin: 0;
+      padding: 0 16px 0 0;
+      list-style: none;
     }
 
     .client-chip {
       display: flex;
-      align-items: center;
-      gap: 14px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
       padding: 11px 26px 11px 11px;
       border: 1px solid rgba(148, 163, 184, .16);
       border-radius: 14px;
@@ -1276,6 +1274,34 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
       white-space: nowrap;
       transition: border-color .3s, background .3s, transform .3s;
+    }
+
+    .client-who {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* A card with an approved quote: wider, quote first, name below. */
+    .client-chip.has-quote {
+      justify-content: space-between;
+      width: clamp(300px, 30vw, 400px);
+      padding: 22px 24px 18px;
+      white-space: normal;
+    }
+
+    .client-chip blockquote {
+      margin: 0;
+      color: #e2e8f0;
+      font: 500 15px/1.6 var(--sans);
+    }
+
+    .client-chip blockquote::before {
+      content: "\201C";
+      display: block;
+      height: 26px;
+      color: var(--accent);
+      font: 700 40px/1 var(--serif);
     }
 
     .client-chip:hover {
@@ -1318,42 +1344,6 @@
       text-transform: uppercase;
     }
 
-    /* Tagline ribbon: alternating solid and outlined lines, divided by
-       a small square that echoes the pixel mark in the logo. */
-    .phrase-row {
-      padding: 14px 0;
-      border-block: 1px solid rgba(148, 163, 184, .12);
-    }
-
-    .phrase-row .client-track {
-      animation-duration: 60s;
-    }
-
-    .phrase-list li {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-    }
-
-    .phrase-list li::after {
-      content: "";
-      width: 8px;
-      height: 8px;
-      margin: 0 clamp(24px, 3vw, 44px);
-      background: var(--accent);
-    }
-
-    .phrase-list span {
-      color: #e2e8f0;
-      font: 700 clamp(22px, 2.6vw, 34px) / 1.1 var(--serif);
-      letter-spacing: -.03em;
-    }
-
-    .phrase-list li:nth-child(even) span {
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(148, 163, 184, .55);
-    }
-
     .client-count {
       color: var(--muted);
       font: 11px var(--mono);
@@ -1371,16 +1361,19 @@
     @media (prefers-reduced-motion: reduce) {
       .client-wall { -webkit-mask-image: none; mask-image: none; }
       .client-track { width: auto; animation: none !important; }
-      .client-list, .phrase-list { flex-wrap: wrap; justify-content: center; row-gap: 12px; }
-      .client-list[aria-hidden="true"], .phrase-list[aria-hidden="true"] { display: none; }
+      .client-list { flex-wrap: wrap; justify-content: center; row-gap: 12px; }
+      .client-list[aria-hidden="true"] { display: none; }
     }
 
     @media (max-width: 640px) {
       .client-wall { gap: 14px; }
-      .client-chip { padding: 9px 20px 9px 9px; gap: 11px; }
+      .client-chip { padding: 9px 20px 9px 9px; }
+      .client-who { gap: 11px; }
       .client-avatar { width: 36px; height: 36px; font-size: 12px; }
       .client-chip b { font-size: 14px; }
+      .client-chip.has-quote { width: 78vw; padding: 18px 18px 14px; }
     }
+
     /* ==========================================================
        11b. CLIENT REVIEWS
        A swipeable row of review cards (scroll-snap, so touch and
@@ -2095,97 +2088,73 @@
         </div>
       </div>
       <div class="client-wall reveal" aria-label="Clients we have worked with">
-        <div class="client-row">
+        <div class="client-row to-right">
           <div class="client-track">
             <ul class="client-list">
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
             </ul>
             <ul class="client-list" aria-hidden="true">
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></span></li>
             </ul>
           </div>
         </div>
-        <div class="client-row phrase-row reverse" aria-hidden="true">
-          <div class="client-track">
-            <ul class="phrase-list">
-                <li><span>Great editors. Great work.</span></li>
-                <li><span>Cut with intent.</span></li>
-                <li><span>Every frame considered.</span></li>
-                <li><span>Built for retention.</span></li>
-                <li><span>On brief. On time.</span></li>
-                <li><span>Raw footage in. Results out.</span></li>
-                <li><span>Stories that hold attention.</span></li>
-                <li><span>Made to be watched.</span></li>
-            </ul>
-            <ul class="phrase-list" aria-hidden="true">
-                <li><span>Great editors. Great work.</span></li>
-                <li><span>Cut with intent.</span></li>
-                <li><span>Every frame considered.</span></li>
-                <li><span>Built for retention.</span></li>
-                <li><span>On brief. On time.</span></li>
-                <li><span>Raw footage in. Results out.</span></li>
-                <li><span>Stories that hold attention.</span></li>
-                <li><span>Made to be watched.</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="client-row">
+        <div class="client-row to-left">
           <div class="client-track">
             <ul class="client-list">
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
             </ul>
             <ul class="client-list" aria-hidden="true">
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></li>
-                <li class="client-chip"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></span></li>
+                <li class="client-chip"><span class="client-who"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></span></li>
             </ul>
           </div>
         </div>
