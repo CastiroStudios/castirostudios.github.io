@@ -1218,6 +1218,253 @@
     }
 
     /* ==========================================================
+       11a. CLIENT WALL
+       Two ribbons of client name chips drifting in opposite
+       directions. Like the tools marquee, each track holds its list
+       twice and slides half its width per loop; only the first copy
+       is read aloud. Hovering a ribbon pauses it.
+       ========================================================== */
+    .client-wall {
+      display: grid;
+      gap: 16px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 clamp(30px, 8vw, 120px), #000 calc(100% - clamp(30px, 8vw, 120px)), transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 clamp(30px, 8vw, 120px), #000 calc(100% - clamp(30px, 8vw, 120px)), transparent);
+    }
+
+    .client-row {
+      overflow: hidden;
+    }
+
+    .client-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 70s linear infinite;
+    }
+
+    .client-row.reverse .client-track {
+      animation-direction: reverse;
+    }
+
+    .client-row:hover .client-track {
+      animation-play-state: paused;
+    }
+
+    .client-list {
+      display: flex;
+      gap: 16px;
+      margin: 0;
+      padding: 0 8px;
+      list-style: none;
+    }
+
+    .client-chip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 24px 12px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: linear-gradient(160deg, #17171b, #0f0f12);
+      white-space: nowrap;
+      transition: border-color .3s, transform .3s;
+    }
+
+    .client-chip:hover {
+      border-color: rgba(var(--accent-rgb), .7);
+      transform: translateY(-3px);
+    }
+
+    .client-avatar {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: #fff;
+      font: 700 14px var(--serif);
+      letter-spacing: .02em;
+      background: linear-gradient(135deg, #5d80f5, #2c3f8f);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+    }
+
+    /* A small rotation of tones keeps a long row from looking stamped
+       out; the brand red from the logo appears as the odd accent. */
+    .client-chip:nth-child(5n+2) .client-avatar { background: linear-gradient(135deg, #3a5cc8, #161f45); }
+    .client-chip:nth-child(5n+3) .client-avatar { background: linear-gradient(135deg, #8b8b94, #2a2a30); }
+    .client-chip:nth-child(5n+4) .client-avatar { background: linear-gradient(135deg, #ff2a12, #7a1408); }
+    .client-chip:nth-child(5n+5) .client-avatar { background: linear-gradient(135deg, #7d9bff, #3a5cc8); }
+
+    .client-chip b {
+      display: block;
+      font: 700 15px var(--sans);
+    }
+
+    .client-chip small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font: 10px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .client-count {
+      color: var(--muted);
+      font: 11px var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .client-count b {
+      color: var(--ink);
+      font: 700 22px var(--serif);
+      letter-spacing: 0;
+      margin-right: 6px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .client-wall { -webkit-mask-image: none; mask-image: none; }
+      .client-track { width: auto; animation: none !important; }
+      .client-list { flex-wrap: wrap; justify-content: center; }
+      .client-list[aria-hidden="true"] { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .client-chip { padding: 9px 18px 9px 9px; gap: 11px; }
+      .client-avatar { width: 38px; height: 38px; font-size: 12px; }
+      .client-chip b { font-size: 14px; }
+    }
+
+    /* ==========================================================
+       11b. CLIENT REVIEWS
+       A swipeable row of review cards (scroll-snap, so touch and
+       trackpads work natively); the arrow buttons just scroll it.
+       ========================================================== */
+    .reviews-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 2 * 18px) / 3);
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+
+    .reviews-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .review-card {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-height: 280px;
+      padding: 30px;
+      scroll-snap-align: start;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(160deg, #16161a, #0f0f12);
+    }
+
+    .review-card blockquote {
+      flex: 1;
+      margin: 0;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .review-card blockquote::before {
+      content: "\201C";
+      display: block;
+      height: 34px;
+      color: var(--accent);
+      font: 700 54px/1 var(--serif);
+    }
+
+    .review-card figcaption {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .review-avatar {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), .16);
+      color: var(--accent);
+      font: 700 15px var(--serif);
+    }
+
+    .review-card cite {
+      display: block;
+      font: 700 15px var(--sans);
+      font-style: normal;
+    }
+
+    .review-card small {
+      color: var(--muted);
+      font: 10px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .reviews-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .reviews-nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .reviews-nav button {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(236, 236, 238, .04);
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color .25s, background .25s;
+    }
+
+    .reviews-nav button:hover {
+      border-color: var(--accent);
+      background: rgba(var(--accent-rgb), .12);
+    }
+
+    .reviews-nav svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .reviews-track { grid-auto-columns: calc((100% - 18px) / 2); }
+    }
+
+    @media (max-width: 640px) {
+      .reviews-track { grid-auto-columns: 86%; }
+      .review-card { padding: 24px; min-height: 0; }
+    }
+
+    /* ==========================================================
        12. FOOTER
        ========================================================== */
     footer {
@@ -1436,8 +1683,7 @@
 
   </style>
 <link rel="stylesheet" href="assets/studio-polish.css">
-<noscript><style>.loader{display:none!important}.reveal,.hero h1 .word{opacity:1!important;transform:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}.nav-inner{height:auto;min-height:64px;flex-wrap:wrap}.menu{display:none!important}</style></noscript>
-<link rel="canonical" href="https://castirostudios.github.io/"><meta property="og:url" content="https://castirostudios.github.io/"><style id="studio-custom-cursor">
+<style id="studio-custom-cursor">
   /* A native SVG cursor stays responsive and visible on the dark canvas.
      Touch devices and text-entry controls keep their usual behavior. */
   @media (hover: hover) and (pointer: fine) {
@@ -1456,7 +1702,8 @@
     body input[type="range"] { cursor: ew-resize; }
   }
 </style>
-</head>
+<noscript><style>.loader{display:none!important}.reveal,.hero h1 .word{opacity:1!important;transform:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}.nav-inner{height:auto;min-height:64px;flex-wrap:wrap}.menu{display:none!important}</style></noscript>
+<link rel="canonical" href="https://castirostudios.github.io/"><meta property="og:url" content="https://castirostudios.github.io/"></head>
 <body class="home">
 <a class="skip-link" href="#main-content">Skip to content</a>
 
@@ -1489,7 +1736,7 @@
       <ul class="nav-links">
         <li><a href="#port">Work</a></li>
         <li><a href="#svc">Capabilities</a></li>
-        <li><a href="#process">Process</a></li><li><a href="#faq">FAQ</a></li>
+        <li><a href="#process">Process</a></li><li><a href="#clients">Clients</a></li><li><a href="#faq">FAQ</a></li>
       </ul>
       <a class="button magnetic" href="#bk">
         Plan your project
@@ -1789,6 +2036,105 @@
     </div>
 
     <!-- ==========================================================
+         CLIENTS
+         The client wall lists people who agreed to be named. Written
+         reviews go in as <figure class="review-card"> inside a
+         .reviews-track (styles in 11b) once each client approves
+         the wording.
+         ========================================================== -->
+    <section class="section" id="clients" aria-labelledby="clients-heading">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow reveal">Client roster</div>
+            <h2 class="reveal delay-1" id="clients-heading">Trusted by creators who ship.</h2>
+          </div>
+          <p class="lead reveal delay-2">Creators, founders and brands who have trusted us with their footage.</p>
+        </div>
+      </div>
+      <div class="client-wall reveal" aria-label="Clients we have worked with">
+          <div class="client-row">
+            <div class="client-track">
+              <ul class="client-list">
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></li>
+              </ul>
+              <ul class="client-list" aria-hidden="true">
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">OH</span><span><b>Oscar Hoole</b><small>Content Smash</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>James Bennett</b><small>Content Smash</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">WJ</span><span><b>Will Jnr</b><small>Boostoral</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">DG</span><span><b>Dylan Ganga</b><small>Cash cow videos</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">H</span><span><b>Hank</b><small>Music video</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JV</span><span><b>Joao Victor</b><small>UGC creator</small></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">RB</span><span><b>Rik Berenschot</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JB</span><span><b>Jacob Bobo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">GC</span><span><b>Gamingwith Cherryboy</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AL</span><span><b>Andres Larrazabal</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">EH</span><span><b>Emmanuel Haslam</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">DC</span><span><b>Daniel Culafic</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">JA</span><span><b>Joao Argolo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">SD</span><span><b>Sri Bharati Devi</b></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="client-row reverse">
+            <div class="client-track">
+              <ul class="client-list">
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></li>
+              </ul>
+              <ul class="client-list" aria-hidden="true">
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AR</span><span><b>Ariane Robitaille</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MG</span><span><b>Marsha Garth</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">PR</span><span><b>Petro Reshetylo</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">WO</span><span><b>William Orna</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">FA</span><span><b>Faiyaz Ajam</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MA</span><span><b>Moe Anvar</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AA</span><span><b>Adrian Argueta</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">MT</span><span><b>Manuel Toccaceli</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">KM</span><span><b>Kerry MacK</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">AK</span><span><b>Arthur Kos-Cassidy</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">KP</span><span><b>Kalysta Paris</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">LB</span><span><b>Luca Catalina Behrendt</b></span></li>
+              <li class="client-chip"><span class="client-avatar" aria-hidden="true">TJ</span><span><b>Thijmen Jonker</b></span></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      <div class="shell">
+        <div class="reviews-foot">
+          <p class="client-count"><b>27</b>clients and counting</p>
+          <a href="mailto:castirostudios@gmail.com?subject=My%20review%20for%20Cast.iro%20Studios&amp;body=Your%20name%3A%0AYour%20role%20%2F%20company%3A%0AYour%20review%3A%0A%0A(By%20sending%20this%2C%20you%20agree%20that%20Cast.iro%20Studios%20may%20show%20your%20review%20and%20name%20on%20its%20website.)" class="button ghost magnetic">
+            Worked with us? Leave a review
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13 13 3M5 3h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- ==========================================================
          BOOKING
          ========================================================== -->
     <section class="section" id="bk">
@@ -1851,7 +2197,7 @@
           <ul class="footer-links">
             <li><a href="#port">Portfolio</a></li>
             <li><a href="#svc">Capabilities</a></li>
-            <li><a href="#process">Process</a></li><li><a href="#faq">FAQ</a></li>
+            <li><a href="#process">Process</a></li><li><a href="#clients">Clients</a></li><li><a href="#faq">FAQ</a></li>
           </ul>
         </div>
         <div>
@@ -2001,6 +2347,22 @@
         if (reopenLink) {
           reopenLink.addEventListener('click', () => showBanner());
         }
+      })();
+
+      /* --------------------------------------------------------
+         CLIENT REVIEWS
+         The track scrolls natively; the arrows move it by one card.
+         -------------------------------------------------------- */
+      (() => {
+        const track = $('#reviews-track');
+        if (!track) return;
+        const step = dir => {
+          const card = track.querySelector('.review-card');
+          const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+          track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: reduce ? 'auto' : 'smooth' });
+        };
+        $('#reviews-prev').addEventListener('click', () => step(-1));
+        $('#reviews-next').addEventListener('click', () => step(1));
       })();
 
       /* --------------------------------------------------------
